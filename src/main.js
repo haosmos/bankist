@@ -208,7 +208,7 @@ allSections.forEach(function (section) {
 });
 
 // Lazy loading images
-const imgTargets = document.querySelectorAll("source[data-srcset]");
+const imgTargets = document.querySelectorAll("img[data-src]");
 
 const loadImg = function (entries, observer) {
   const [entry] = entries;
@@ -217,7 +217,7 @@ const loadImg = function (entries, observer) {
   console.log(entry.target);
 
   // Replace srcset with data-srcset
-  entry.target.srcset = entry.target.dataset.srcset;
+  entry.target.src = entry.target.dataset.src;
 
   entry.target.addEventListener("load", function () {
     entry.target.className.remove("lazy-img");
@@ -561,3 +561,4 @@ window.addEventListener('beforeunload', function (e) {
   e.returnValue = '';
 });
 */
+
