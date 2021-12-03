@@ -214,7 +214,6 @@ const loadImg = function (entries, observer) {
   const [entry] = entries;
 
   if (!entry.isIntersecting) return;
-  console.log(entry.target);
 
   // Replace srcset with data-srcset
   entry.target.src = entry.target.dataset.src;
