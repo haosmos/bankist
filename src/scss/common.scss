@@ -34,11 +34,7 @@ p {
   color: #666;
 }
 
-img {
-  transition: filter 0.5s;
-}
-
-picture.source {
+picture > img {
   transition: filter 0.5s;
 }
 

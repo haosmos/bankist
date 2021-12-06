@@ -149,7 +149,6 @@ const handleHover = function (e) {
 
     siblings.forEach(el => {
       if (el !== link) el.style.opacity = this;
-      console.log(this);
     });
     logo.style.opacity = this;
 
@@ -208,7 +207,7 @@ allSections.forEach(function (section) {
 });
 
 // Lazy loading images
-const imgTargets = document.querySelectorAll("img[data-src]");
+const imgTargets = document.querySelectorAll("picture > source");
 
 const loadImg = function (entries, observer) {
   const [entry] = entries;
@@ -216,11 +215,14 @@ const loadImg = function (entries, observer) {
   if (!entry.isIntersecting) return;
 
   // Replace srcset with data-srcset
-  entry.target.src = entry.target.dataset.src;
+  entry.target.srcset = entry.target.dataset.srcset;
+  // entry.target.classList.remove("lazy-img");
+  entry.target.nextElementSibling.classList.remove("lazy-img");
 
-  entry.target.addEventListener("load", function () {
-    entry.target.classList.remove("lazy-img");
-  });
+  // entry.target.addEventListener("load", function () {
+  //   console.log(`oho! the ${entry.target} was loaded!`);
+  //   entry.target.classList.remove("lazy-img");
+  // });
 
   observer.unobserve(entry.target);
 };
@@ -228,10 +230,10 @@ const loadImg = function (entries, observer) {
 const imgObserver = new IntersectionObserver(loadImg, {
   root: null,
   threshold: 0,
-  rootMargin: "-200px",
+  rootMargin: "0px 0px -200px 0px",
 });
 
-imgTargets.forEach(img => imgObserver.observe(img));
+imgTargets.forEach(picture => imgObserver.observe(picture));
 
 ///////////////////////////////////////
 // Slider
